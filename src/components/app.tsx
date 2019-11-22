@@ -9,18 +9,17 @@ import GithubIcon from './icons/github';
 
 const App:React.FC = () => {
 	return <div className="main">
-		<FluidBackground />
 		<div className="segment">
-			<div id="title">Jakob Mulvad Nielsen</div>
-			<div>Freelance senior developer</div>
+			<div id="title">JAKOB MULVAD NIELSEN</div>
+			<span style={{'borderTop': '1px solid rgba(0,0,0,.2)'}}>freelance senior developer</span>
 		</div>
 		<div className="segment">
 			<div style={{position: 'relative'}}><span>need help with </span><TechWheel /></div>
 		</div>
 		<div className="segment icon-list">
-			<GmailIcon />
-			<LinkedInIcon />
-			<GithubIcon />
+			<a href="mailto:mulvad@gmail.com" target="_blank"><GmailIcon /></a>
+			<a href="https://www.linkedin.com/in/jakob-mulvad-nielsen-5a53096/" target="_blank"><LinkedInIcon /></a>
+			<a href="https://github.com/jakobmulvad" target="_blank"><GithubIcon /></a>
 		</div>
 	</div>
 }
