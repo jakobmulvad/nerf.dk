@@ -1,4 +1,4 @@
-import FluidSolver from './fluid-solver'
+import FluidSolver from './js-fluid-solver'
 
 const zgradient = [
 	[0,0,0],

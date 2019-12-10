@@ -1,7 +1,7 @@
 import React from "react";
 
 export default () => (
-	<svg width="64" height="64" viewBox="0 0 256 194" version="1.1" preserveAspectRatio="xMidYMid">
+	<svg width="32" height="32" viewBox="0 0 256 194" version="1.1" preserveAspectRatio="xMidYMid">
 		<defs>
 			<linearGradient x1="0.00388991071%" y1="49.997619%" x2="100.032232%" y2="49.997619%" id="linearGradient-1">
 				<stop stop-color="#000000" stop-opacity="0.1" offset="0%"></stop>

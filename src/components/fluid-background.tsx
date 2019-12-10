@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import FluidRenderer from '../fluid-renderer';
+import FluidRenderer from '../js-fluid-renderer';
 
 const FluidBackground = () => {
 	const canvasRef = useRef(null);
