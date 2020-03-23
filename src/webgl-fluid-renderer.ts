@@ -1,41 +1,54 @@
-import * as twgl from 'twgl.js'
+import * as twgl from "twgl.js";
 // @ts-ignore
-import fs from './shader.frag.glsl'
+import fs from "./shader.frag.glsl";
 // @ts-ignore
-import vs from './shader.vert.glsl'
+import vs from "./shader.vert.glsl";
 
-console.log(fs)
+console.log(fs);
 
 class WebGLFluidRenderer {
-	private gl: WebGLRenderingContext;
-	private programInfo: twgl.ProgramInfo;
-	private bufferInfo: twgl.BufferInfo;
+  private gl: WebGLRenderingContext;
+  private programInfo: twgl.ProgramInfo;
+  private bufferInfo: twgl.BufferInfo;
 
-	constructor(canvas: HTMLCanvasElement) {
-		this.gl = canvas.getContext("webgl");
+  constructor(canvas: HTMLCanvasElement) {
+    const gl = (this.gl = canvas.getContext("webgl"));
 
-		this.programInfo = twgl.createProgramInfo(this.gl, [vs, fs]);
+    this.programInfo = twgl.createProgramInfo(gl, [vs, fs]);
 
-		const arrays = {
-		  position: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0],
-		};
-		this.bufferInfo = twgl.createBufferInfoFromArrays(this.gl, arrays);
-	}
+    const arrays = {
+      position: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0],
+      texCoord: [0, 0, 0, 1, 1, 1, 1, 0],
+    };
+    this.bufferInfo = twgl.createBufferInfoFromArrays(gl, arrays);
 
-	render(time: number) {
-		twgl.resizeCanvasToDisplaySize(this.gl.canvas as HTMLCanvasElement);
-		this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
+    const attachments = [
+      {
+        format: gl.RGBA,
+        type: gl.UNSIGNED_BYTE,
+        min: gl.LINEAR,
+        wrap: gl.CLAMP_TO_EDGE
+      },
+      { format: gl.DEPTH_STENCIL }
+    ];
+    const fbi = twgl.createFramebufferInfo(gl, attachments);
+  }
 
-		const uniforms = {
-			time: time * 0.001,
-			resolution: [this.gl.canvas.width, this.gl.canvas.height],
-		};
+  render(time: number) {
+    const gl = this.gl;
+    twgl.resizeCanvasToDisplaySize(gl.canvas as HTMLCanvasElement);
+    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
-		this.gl.useProgram(this.programInfo.program);
-		twgl.setBuffersAndAttributes(this.gl, this.programInfo, this.bufferInfo);
-		twgl.setUniforms(this.programInfo, uniforms);
-		twgl.drawBufferInfo(this.gl, this.bufferInfo);
-	}
+    const uniforms = {
+      time: time * 0.001,
+      resolution: [gl.canvas.width, gl.canvas.height]
+    };
+
+    gl.useProgram(this.programInfo.program);
+    twgl.setBuffersAndAttributes(gl, this.programInfo, this.bufferInfo);
+    twgl.setUniforms(this.programInfo, uniforms);
+    twgl.drawBufferInfo(gl, this.bufferInfo);
+  }
 }
 
-export default WebGLFluidRenderer
+export default WebGLFluidRenderer;

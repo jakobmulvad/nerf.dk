@@ -4,9 +4,10 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 const labels = [
   "react",
   "nodejs",
-  "microservices",
-  "mobile apps",
-  "javascript"
+  "microservice",
+  "mobile app",
+  "javascript",
+  "fullstack"
 ];
 
 const TechWheel: React.FC = () => {
@@ -20,14 +21,11 @@ const TechWheel: React.FC = () => {
   }, [setActive]);
 
   return (
-    <>
-      <TransitionGroup component={null}>
-        <CSSTransition key={active} timeout={2000} classNames="tech">
-          <span className="tech">{labels[active]}?</span>
-        </CSSTransition>
-      </TransitionGroup>
-      <span style={{ visibility: "hidden" }}>microservices</span>
-    </>
+    <TransitionGroup component={null}>
+      <CSSTransition key={active} timeout={2000} classNames="tech">
+        <span className="tech">{labels[active]}</span>
+      </CSSTransition>
+    </TransitionGroup>
   );
 };
 
