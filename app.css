@@ -1,0 +1,51 @@
+body {
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+	font-size: calc(10px + 3vw);
+	background-color: #e6e6e6;
+	background: linear-gradient(0deg, rgb(214, 214, 214) 0%, rgb(250, 250, 250) 100%);
+}
+
+.tech {
+	color: #da7900;
+	font-family: 'Nanum Pen Script';
+	text-shadow: none;
+	position: absolute;
+}
+
+.tech-enter {
+	opacity: 0;
+	top: 60px;
+}
+.tech-enter-active {
+	opacity: 1;
+	top: 0px;
+	transition: opacity 500ms, top 500ms;
+	transition-timing-function: ease-in-out;
+}
+.tech-exit {
+	opacity: 1;
+	top: 0px;
+}
+.tech-exit-active {
+	opacity: 0;
+	top: -60px;
+	transition: opacity 500ms, top 500ms;
+	transition-timing-function: ease-in-out;
+}
+
+#title {
+	font-size: calc(10px + 6vw);
+}
+
+.icon-list {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.icon-list > * {
+	margin-left: 2vw;
+	width: 8vw;
+}
+
