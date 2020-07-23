@@ -22,6 +22,6 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
+          BRANCH: master
           REPOSITORY_NAME: jakobmulvad/jakobmulvad.github.io
           FOLDER: build
