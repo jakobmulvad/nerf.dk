@@ -4,10 +4,11 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 const labels = [
   "react",
   "nodejs",
+  "javascript",
   "microservice",
   "mobile app",
-  "javascript",
-  "fullstack"
+  "fullstack",
+  "typescript",
 ];
 
 const TechWheel: React.FC = () => {
@@ -15,7 +16,7 @@ const TechWheel: React.FC = () => {
 
   useEffect(() => {
     const i = setInterval(() => {
-      setActive(n => (n + 1) % labels.length);
+      setActive((n) => (n + 1) % labels.length);
     }, 2000);
     return () => clearInterval(i);
   }, [setActive]);
