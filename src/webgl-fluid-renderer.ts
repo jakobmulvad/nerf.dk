@@ -7,12 +7,13 @@ import vs from "./shader.vert.glsl";
 console.log(fs);
 
 class WebGLFluidRenderer {
-  private gl: WebGLRenderingContext;
+  private gl: WebGL2RenderingContext;
   private programInfo: twgl.ProgramInfo;
   private bufferInfo: twgl.BufferInfo;
+  private textures: {[key: string]: WebGLTexture};
 
   constructor(canvas: HTMLCanvasElement) {
-    const gl = (this.gl = canvas.getContext("webgl"));
+    const gl = (this.gl = canvas.getContext("webgl2"));
 
     this.programInfo = twgl.createProgramInfo(gl, [vs, fs]);
 
@@ -24,14 +25,30 @@ class WebGLFluidRenderer {
 
     const attachments = [
       {
-        format: gl.RGBA,
-        type: gl.UNSIGNED_BYTE,
+        format: gl.R16F,
+        type: gl.RED,
         min: gl.LINEAR,
         wrap: gl.CLAMP_TO_EDGE
       },
       { format: gl.DEPTH_STENCIL }
     ];
     const fbi = twgl.createFramebufferInfo(gl, attachments);
+
+    const textures = twgl.createTextures(gl, {
+      front: {
+        internalFormat: gl.R16F,
+        format: gl.RED,
+        type: gl.HALF_FLOAT,
+        src: new Uint16Array([255, 0, 128, 0]),
+      },
+      back: {
+        internalFormat: gl.R16F,
+        format: gl.RED,
+        type: gl.HALF_FLOAT,
+        src: new Uint16Array([255, 0, 128, 0]),
+      }
+    });
+    console.log(textures);
   }
 
   render(time: number) {
@@ -41,6 +58,7 @@ class WebGLFluidRenderer {
 
     const uniforms = {
       time: time * 0.001,
+      u_diffuse: this.textures['front'],
       resolution: [gl.canvas.width, gl.canvas.height]
     };
 
